@@ -1,0 +1,31 @@
+﻿transaction_id,store_location,product_id,unit_price,product_category,product_type,product_detail
+1,Lower Manhattan,32,3,Coffee,Gourmet brewed coffee,Ethiopia Rg
+2,Lower Manhattan,57,3.1,Tea,Brewed Chai tea,Spicy Eye Opener Chai Lg
+3,Lower Manhattan,59,4.5,Drinking Chocolate,Hot chocolate,Dark chocolate Lg
+4,Lower Manhattan,22,2,Coffee,Drip coffee,Our Old Time Diner Blend Sm
+5,Lower Manhattan,57,3.1,Tea,Brewed Chai tea,Spicy Eye Opener Chai Lg
+6,Lower Manhattan,77,3,Bakery,Scone,Oatmeal Scone
+7,Lower Manhattan,22,2,Coffee,Drip coffee,Our Old Time Diner Blend Sm
+8,Lower Manhattan,28,2,Coffee,Gourmet brewed coffee,Columbian Medium Roast Sm
+9,Lower Manhattan,39,4.25,Coffee,Barista Espresso,Latte Rg
+10,Lower Manhattan,58,3.5,Drinking Chocolate,Hot chocolate,Dark chocolate Rg
+11,Lower Manhattan,56,2.55,Tea,Brewed Chai tea,Spicy Eye Opener Chai Rg
+12,Lower Manhattan,33,3.5,Coffee,Gourmet brewed coffee,Ethiopia Lg
+13,Lower Manhattan,51,3,Tea,Brewed Black tea,Earl Grey Lg
+14,Lower Manhattan,57,3.1,Tea,Brewed Chai tea,Spicy Eye Opener Chai Lg
+15,Lower Manhattan,87,3,Coffee,Barista Espresso,Ouro Brasileiro shot
+16,Lower Manhattan,47,3,Tea,Brewed Green tea,Serenity Green Tea Lg
+17,Lower Manhattan,79,3.75,Bakery,Scone,Jumbo Savory Scone
+18,Hell's Kitchen,42,2.5,Tea,Brewed herbal tea,Lemon Grass Rg
+19,Hell's Kitchen,59,4.5,Drinking Chocolate,Hot chocolate,Dark chocolate Lg
+20,Hell's Kitchen,61,4.75,Drinking Chocolate,Hot chocolate,Sustainably Grown Organic Lg
+21,Hell's Kitchen,33,3.5,Coffee,Gourmet brewed coffee,Ethiopia Lg
+22,Lower Manhattan,56,2.55,Tea,Brewed Chai tea,Spicy Eye Opener Chai Rg
+23,Lower Manhattan,69,3.25,Bakery,Biscotti,Hazelnut Biscotti
+24,Hell's Kitchen,56,2.55,Tea,Brewed Chai tea,Spicy Eye Opener Chai Rg
+25,Hell's Kitchen,40,3.75,Coffee,Barista Espresso,Cappuccino
+26,Lower Manhattan,43,3,Tea,Brewed herbal tea,Lemon Grass Lg
+27,Lower Manhattan,76,3.5,Bakery,Biscotti,Chocolate Chip Biscotti
+28,Lower Manhattan,45,3,Tea,Brewed herbal tea,Peppermint Lg
+29,Lower Manhattan,71,3.75,Bakery,Pastry,Chocolate Croissant
+30,Hell's Kitchen,40,3.75,Coffee,Barista Espresso,Cappuccino
