@@ -16,7 +16,6 @@ int main()
     return 0 ;
 }
 
-
 /* --------------- Menu --------------- */
 void menu()
 {
@@ -25,7 +24,7 @@ void menu()
     do
     {
         system("CLS") ;
-        printf("===== COFFEE SALES MENU =====\n") ;
+        printf("===== COFFEE SHOP SALES MENU =====\n") ;
 
         printf("1. View Data\n") ;
         printf("2. Add New Data\n") ;
@@ -85,7 +84,7 @@ void viewData()
     }
 
     char line[256] ;
-    char id[20], store[50], productID[20], price[20], category[20], type[20], detail[50] ;
+    char id[256], store[256], productID[256], price[256], category[256], type[256], detail[256] ;
     int choice ;
 
     do
@@ -115,7 +114,7 @@ void viewData()
 
 void addNewData()
 {
-    char transaction_id[20], store[50], productID[20], price[20], category[20], type[20], detail[50] ;
+    char transaction_id[256], store[256], productID[256], price[256], category[256], type[256], detail[256] ;
     char confirm ;
     int choice ;
 
