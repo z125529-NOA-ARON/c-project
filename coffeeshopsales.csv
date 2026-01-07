@@ -1,4 +1,4 @@
-﻿transaction_id,store_location,product_id,unit_price,product_category,product_type,product_detail
+transaction_id,store_location,product_id,unit_price,product_category,product_type,product_detail
 1,Lower Manhattan,32,3,Coffee,Gourmet brewed coffee,Ethiopia Rg
 2,Lower Manhattan,57,3.1,Tea,Brewed Chai tea,Spicy Eye Opener Chai Lg
 3,Lower Manhattan,59,4.5,Drinking Chocolate,Hot chocolate,Dark chocolate Lg
@@ -29,3 +29,4 @@
 28,Lower Manhattan,45,3,Tea,Brewed herbal tea,Peppermint Lg
 29,Lower Manhattan,71,3.75,Bakery,Pastry,Chocolate Croissant
 30,Hell's Kitchen,40,3.75,Coffee,Barista Espresso,Cappuccino
+31,Toyosu,51,3.5,Cappuccino,Latte,Coconut
