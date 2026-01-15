@@ -4,6 +4,7 @@
 
 /* --------------- Prototype --------------- */
 void viewData() ;
+void displayAllData() ;
 void addNewData() ;
 void editData() ;
 void deleteData() ;
@@ -25,7 +26,9 @@ void menu()
     do
     {
         system("CLS") ;
-        printf("===== COFFEE SHOP SALES MENU =====\n") ;
+        printf("\033[30m\033[47m|----------------------------------|\033[0m\033[0m\n") ;
+        printf("\033[30m\033[47m|      COFFEE SHOP SALES MENU      |\033[0m\033[0m\n") ;
+        printf("\033[30m\033[47m|----------------------------------|\033[0m\033[0m\n\n") ;
 
         printf("1. View Data\n") ;
         printf("2. Add New Data\n") ;
@@ -70,7 +73,7 @@ void menu()
 
         else
         {
-            printf("\e[31mInvalid choice.\e[0m\n") ;
+            printf("\e[31mERROR - Invalid choice\e[0m\n") ;
             printf("\nPress Enter to continue...") ;
             getchar() ; getchar() ;
         }
@@ -78,13 +81,16 @@ void menu()
     } while (choice != 6 ) ;
 }
 
+
+
+
 /* --------------- Functions --------------- */
 void viewData()
 {
     FILE *file = fopen("coffeeshopsales.csv", "r") ;
     if (file == NULL)
     {
-        printf("Error: cannot open coffeeshopsales.csv\n") ;
+        printf("\033[31mERROR - Cannot open file\033[0m\n") ;
         return ;
     }
 
@@ -122,7 +128,7 @@ void displayAllData()
     FILE *file = fopen("coffeeshopsales.csv", "r") ;
     if (file == NULL)
     {
-        printf("Error: cannot open coffeeshopsales.csv\n") ;
+        printf("\033[31mERROR - Cannot open file\033[0m\n") ;
         return ;
     }
 
@@ -131,7 +137,7 @@ void displayAllData()
     int choice ;
 
     printf("%-5s %-17s %-12s %-7s %-20s %-15s %-20s\n", "ID", "Store", "Product ID", "Price", "Category", "Type", "Detail") ;
-    printf("-------------------------------------------------------------------------------------------------------------\n") ;
+    printf("---------------------------------------------------------------------------------------------------------\n") ;
 
     fseek(file, 0, SEEK_SET) ;
     fgets(line, sizeof(line), file) ;
@@ -152,32 +158,59 @@ void addNewData()
 {
     char transaction_id[256], store[256], productID[256], price[256], category[256], type[256], detail[256] ;
     char confirm ;
-    int choice ;
+    int choice, idExists ;
 
     do
     {
         system("CLS") ;
-        printf("===== Add New Coffee Sales ===== \n") ;
+        printf("\033[30m\033[47m|----------------------------------|\033[0m\033[0m\n") ;
+        printf("\033[30m\033[47m|       Add New Coffee Sales       |\033[0m\033[0m\n") ;
+        printf("\033[30m\033[47m|----------------------------------|\033[0m\033[0m\n\n") ;
 
-        printf("Enter the Transaction ID: ") ;
-        scanf("%s", transaction_id) ;
+        FILE *file ;
 
-        printf("Enter the Store Location: ") ;
+        do
+        {
+            idExists = 0 ;
+            printf("Enter the Transaction ID: ") ;
+            scanf("%s", transaction_id) ;
+
+            file = fopen("coffeeshopsales.csv", "r") ;
+            if (file != NULL)
+            {
+                char line[512], existingID[256] ;
+                fgets(line, sizeof(line), file) ;
+                while (fgets(line, sizeof(line), file))
+                {
+                    sscanf(line,  "%[^,],%*[^,],%*[^,],%*[^,],%*[^,],%*[^,],%*s", existingID) ;
+                    if (strcmp(transaction_id, existingID) == 0)
+                    {
+                        printf("\033[31mERROR - Transaction ID already exists. Please enter a different ID.\033[0m\n\n") ;
+                        idExists = 1 ;
+                        break ;
+                    }
+                }
+                fclose(file) ;
+            }
+        } while (idExists) ;
+
+
+        printf("   Enter the Store Location: ") ;
         scanf(" %[^\n]", store) ;
 
-        printf("Enter the Product ID: ") ;
+        printf("   Enter the Product ID: ") ;
         scanf("%s", productID) ;
 
-        printf("Enter the Price: ") ;
+        printf("   Enter the Price: ") ;
         scanf("%s", price) ;
 
-        printf("Enter the Category: ") ;
+        printf("   Enter the Category: ") ;
         scanf(" %[^\n]", category) ;
 
-        printf("Enter the Type: ") ;
+        printf("   Enter the Type: ") ;
         scanf(" %[^\n]", type) ;
 
-        printf("Enter the Detail: ") ;
+        printf("   Enter the Detail: ") ;
         scanf(" %[^\n]", detail) ;
 
         printf("\nYou entered:\n") ;
@@ -189,10 +222,10 @@ void addNewData()
 
         if (confirm == 'Y' || confirm == 'y')
         {
-            FILE *file = fopen("coffeeshopsales.csv", "a+") ;
+            file = fopen("coffeeshopsales.csv", "a+") ;
             if (file == NULL)
             {
-                printf("Error: cannot open coffeeshopsales.csv\n") ;
+                printf("\033[31mERROR - Cannot open file\033[0m\n") ;
             }
 
             else
@@ -209,7 +242,7 @@ void addNewData()
 
                 fprintf(file, "%s,%s,%s,%s,%s,%s,%s\n", transaction_id, store, productID, price, category, type, detail) ;
                 fclose(file) ;
-                printf("Entry added successfully!\n") ;
+                printf("\e[32mSUCCESS - Entry added successfully!\e[0m\n") ;
             }
         }
 
@@ -247,13 +280,15 @@ void editData()
 
         if (file == NULL || temp == NULL)
         {
-            printf("Error: cannot open file\n") ;
+            printf("\e[31mERROR - cannot open file\e[0m\n") ;
             printf("\nPress 0 to return to menu: ") ;
             scanf("%d", &choice) ;
             return ;
         }
 
-        printf("===== Edit Coffee Sales =====\n") ;
+        printf("\033[30m\033[47m|---------------------------------|\033[0m\033[0m\n") ;
+        printf("\033[30m\033[47m|        Edit Coffee Sales        |\033[0m\033[0m\n") ;
+        printf("\033[30m\033[47m|---------------------------------|\033[0m\033[0m\n\n") ;
         displayAllData() ;
 
         printf("\nEnter the Transaction ID to edit: ") ;
@@ -289,7 +324,7 @@ void editData()
                     printf("6. Detail\n") ;
                     printf("7. Finish editing (save & quit)\n") ;
 
-                    printf("Choose an option (1-7): ") ;
+                    printf("\nChoose an option (1-7): ") ;
                     scanf("%d", &editChoice) ;
 
                     if (editChoice == 1)
@@ -341,7 +376,7 @@ void editData()
 
                     else
                     {
-                        printf("\e[31mInvalid choice.\e[0m\n") ;
+                        printf("\e[31mERROR - Invalid choice\e[0m\n") ;
                         printf("\nPress Enter to continue...") ;
                         getchar() ; getchar() ;
                     }
@@ -358,13 +393,13 @@ void editData()
         {
             remove("coffeeshopsales.csv") ;
             rename("temp.csv", "coffeeshopsales.csv") ;
-            printf("\n\e[32mEntry updated successfully!\e[0m\n") ;
+            printf("\n\n\e[32mSUCCESS - Entry updated successfully!\e[0m\n") ;
         }
 
         else
         {
             remove("temp.csv") ;
-            printf("\n\e[31mTransaction ID not found.\e[0m\n") ;
+            printf("\n\e[31mERROR - Transaction ID not found\e[0m\n") ;
         }
 
         printf("\nPress 0 to return to the menu: ") ;
@@ -379,13 +414,14 @@ void deleteData()
     char searchID[256] ;
     char line[512] ;
     char transaction_id[256], store[256], productID[256], price[256], category[256], type[256], detail[256] ;
-    int choice ;
-    int found ;
+    int choice, found ;
 
     do
     {
         system("CLS") ;
-        printf("===== Delete Coffee Sales =====\n") ;
+        printf("\033[30m\033[47m|---------------------------------|\033[0m\033[0m\n") ;
+        printf("\033[30m\033[47m|       Delete Coffee Sales       |\033[0m\033[0m\n") ;
+        printf("\033[30m\033[47m|---------------------------------|\033[0m\033[0m\n\n") ;
         displayAllData() ;
 
         file = fopen("coffeeshopsales.csv", "r") ;
@@ -393,7 +429,7 @@ void deleteData()
 
         if (file == NULL || temp == NULL)
         {
-            printf("Error: cannot open file\n") ;
+            printf("\033[31mERROR - Cannot open file\033[0m\n") ;
             printf("\nPress 0 to return to menu: ") ;
             scanf("%d", &choice) ;
             return ;
@@ -429,12 +465,12 @@ void deleteData()
         {
             remove("coffeeshopsales.csv") ;
             rename("temp.csv", "coffeeshopsales.csv") ;
-            printf("\n\e[32mEntry deleted successfully!\e[0m\n") ;
+            printf("\n\e[32mSUCCESS - Entry deleted successfully!\e[0m\n") ;
         }
         else
         {
             remove("temp.csv") ;
-            printf("\n\e[31mTransaction ID not found.\e[0m\n") ;
+            printf("\n\e[31mERROR - Transaction ID not found\e[0m\n") ;
         }
 
         printf("\nPress 0 to return to the menu: ") ;
@@ -445,14 +481,137 @@ void deleteData()
 
 void searchData()
 {
-    int choice ;
+    FILE *file ;
+    char line[512] ;
+    char transaction_id[256], store[256], productID[256], price[256], category[256], type[256], detail[256] ;
+    char selectedCategory[256] ;
+    int choice, found ;
+
 
     do
     {
         system("CLS") ;
-        printf("searchData called\n") ;
+        found = 0 ;
 
-        printf("\nPress 0 to return to the menu: ") ;
+        printf("\033[30m\033[47m|--------------------------------|\033[0m\033[0m\n") ;
+        printf("\033[30m\033[47m|        COFFEE SHOP MENU        |\033[0m\033[0m\n") ;
+        printf("\033[30m\033[47m|--------------------------------|\033[0m\033[0m\n\n") ;
+
+        printf("\n   HOT DRINKS\n") ;
+        printf("    1. Coffee\n") ;
+        printf("    2. Tea\n") ;
+        printf("    3. Drinking Chocolate\n") ;
+        printf("    4. Espresso\n") ;
+        printf("    5. Latte\n") ;
+
+        printf("\n   COLD DRINKS\n") ;
+        printf("    6. Iced Coffee\n") ;
+        printf("    7. Cold Brew\n") ;
+        printf("    8. Iced Tea\n") ;
+
+        printf("\n   FOOD\n") ;
+        printf("    9. Bakery\n") ;
+        printf("    10. Snacks\n") ;
+
+        printf("\n0. Return to main menu\n\n") ;
+        printf("Choose a category: ") ;
+        scanf("%d", &choice) ;
+
+        if (choice == 0)
+            return ;
+
+        if (choice == 1)
+            strcpy(selectedCategory, "Coffee") ;
+        else if (choice == 2)
+            strcpy(selectedCategory, "Tea") ;
+        else if (choice == 3)
+            strcpy(selectedCategory, "Drinking Chocolate") ;
+        else if (choice == 4)
+            strcpy(selectedCategory, "Espresso") ;
+        else if (choice == 5)
+            strcpy(selectedCategory, "Latte") ;
+        else if (choice == 6)
+            strcpy(selectedCategory, "Iced Coffee") ;
+        else if (choice == 7)
+            strcpy(selectedCategory, "Cold Brew") ;
+        else if (choice == 8)
+            strcpy(selectedCategory, "Iced Tea") ;
+        else if (choice == 9)
+            strcpy(selectedCategory, "Bakery") ;
+        else if (choice == 10)
+            strcpy(selectedCategory, "Snacks") ;
+        else
+        {
+            printf("\n\e[31mERROR - Invalid choice\e[0m\n") ;
+            printf("Press Enter to continue...") ;
+            getchar() ; getchar() ;
+            continue ;
+        }
+
+        system("CLS") ;
+        printf("========== CATEGORY: %s ==========\n\n", selectedCategory) ;
+
+        file = fopen("coffeeshopsales.csv", "r") ;
+        if (file == NULL)
+        {
+            printf("\033[31mERROR - Cannot open file\033[0m\n") ;
+            printf("Press Enter to continue...") ;
+            getchar() ; getchar() ;
+            return ;
+        }
+
+        fgets(line, sizeof(line), file) ;
+
+        while (fgets(line, sizeof(line), file))
+        {
+            sscanf(line, "%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]",
+                   transaction_id, store, productID, price,
+                   category, type, detail) ;
+
+            if (strcmp(category, selectedCategory) == 0)
+            {
+                if (!found)
+                {
+                    printf("%-5s %-17s %-12s %-7s %-20s %-15s %-20s\n",
+                           "ID", "Store", "Product ID", "Price",
+                           "Category", "Type", "Detail") ;
+                    printf("-------------------------------------------------------------------------------------------------------------\n") ;
+                }
+
+                found = 1 ;
+
+                printf("%-5s %-17.17s %-12.12s %-7.7s %-20.20s %-15.15s %-20.20s\n",
+                       transaction_id, store, productID, price,
+                       category, type, detail) ;
+            }
+        }
+
+        fclose(file) ;
+
+        if (!found)
+        {
+            char soldOutMsg[] = "SOLD OUT - NO ITEMS FOUND" ;
+            int len, msgLen, spaces, i ;
+
+            len = strlen("========== CATEGORY: ") + strlen(selectedCategory) + strlen(" ==========") ;
+            msgLen = strlen(soldOutMsg) ;
+            spaces = (len - msgLen) / 2 ;
+
+
+
+            for(i = 0 ; i < spaces ; i++)
+            {
+                printf(" ") ;
+            }
+            printf("\033[41m%s\033[0m\n\n", soldOutMsg) ;
+
+            for(i = 0 ; i < len ; i++)
+            {
+                printf("=") ;
+            }
+        }
+
+        printf("\n\nPress 0 to return to the menu: ") ;
         scanf("%d", &choice) ;
 
     } while (choice != 0) ;
