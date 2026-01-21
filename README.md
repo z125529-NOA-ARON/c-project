@@ -10,15 +10,15 @@ Manage coffee sales based on a CSV file.
 
 # Project Structure
 
-├── add.c
-├── delete.c
-├── display.c
-├── edit.c
-├── header.h
-├── main.c
-├── menu.c
-├── search.c
-├── coffeeshopsales.csv
+├── add.c<br>
+├── delete.c<br>
+├── display.c<br>
+├── edit.c<br>
+├── header.h<br>
+├── main.c<br>
+├── menu.c<br>
+├── search.c<br>
+├── coffeeshopsales.csv<br>
 └── README.md
 
 # Compilation
