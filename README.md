@@ -23,8 +23,7 @@ Manage coffee sales based on a CSV file.
 
 # Compilation
 
-main.c menu.c add.c delete.c display.c edit.c search.c \
--o coffeeshop
+gcc main.c menu.c add.c delete.c display.c edit.c search.c -o coffeeshop
 
 # Execute
 
